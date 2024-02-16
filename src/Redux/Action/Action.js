@@ -1,22 +1,15 @@
 // actions.js
-const { ADD_TO_CART, REMOVE_FROM_CART } = require("./ActionTypes");
+import {ADD_TO_CART, REMOVE_FROM_CART} from '../ActionTypes';
 
 // Action creators
-const addToCart = (item) => {
-    return {
-        type: ADD_TO_CART,
-        payload: item
-    };
-};
+// Action.js
 
-const removeFromCart = (itemId) => {
-    return {
-        type: REMOVE_FROM_CART,
-        payload: { id: itemId }
-    };
-};
+export const addToCart = item => ({
+  type: ADD_TO_CART,
+  payload: item,
+});
 
-module.exports = {
-    addToCart,
-    removeFromCart
-};
+export const removeFromCart = itemId => ({
+  type: REMOVE_FROM_CART,
+  payload: itemId,
+});

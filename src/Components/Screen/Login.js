@@ -1,5 +1,5 @@
 // LoginForm.js
-import React, {useContext} from 'react';
+import React from 'react';
 import {
   View,
   StyleSheet,
@@ -11,9 +11,9 @@ import {
 } from 'react-native';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
-import {contextData} from '../ContextNew/context';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useState} from 'react';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email!').required('Email is required!'),
@@ -21,8 +21,8 @@ const validationSchema = Yup.object().shape({
 });
 
 const Login = () => {
-  const {setUser} = useContext(contextData);
   const navigation = useNavigation();
+  const [user, setUser] = useState(null);
 
   const handleSubmit = async values => {
     const {email} = values;
@@ -32,7 +32,7 @@ const Login = () => {
         Alert.alert('Login Successful');
         await AsyncStorage.setItem('currUser', email);
         setUser(email);
-        navigation.navigate('PhotosFile');
+        navigation.navigate('ProductCart');
       } else {
         Alert.alert('User not found, Redirecting to Sign-Up Page');
         navigation.push('SignUp');
@@ -70,7 +70,11 @@ const Login = () => {
               onBlur={handleBlur('email')}
               value={values.email}
             />
-            {touched.email && errors.email && (
+            {/* {touched.email && errors.email && (
+              <Text style={styles.error}>{errors.email}</Text>
+            )} */}
+
+            {touched.email && errors.email !== '' && (
               <Text style={styles.error}>{errors.email}</Text>
             )}
             <TextInput
@@ -81,9 +85,14 @@ const Login = () => {
               value={values.password}
               secureTextEntry
             />
-            {touched.password && errors.password && (
+            {/* {touched.password && errors.password && (
+              <Text style={styles.error}>{errors.password}</Text>
+            )} */}
+
+            {touched.password && errors.password !== '' && (
               <Text style={styles.error}>{errors.password}</Text>
             )}
+
             <TouchableOpacity
               style={styles.button}
               onPress={handleSubmit}

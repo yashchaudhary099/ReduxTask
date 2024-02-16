@@ -75,7 +75,7 @@ const validationSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email!').required('Email is required!'),
   password: Yup.string()
     .trim()
-    .min(8, 'Password is too short!')
+    .min(4, 'Password is too short!')
     .required('Password is required!'),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Password does not match!')
@@ -88,7 +88,8 @@ const FormInput = ({placeholder, label, error, ...rest}) => {
     <>
       <View style={styles.row}>
         <Text style={styles.label}>{label}</Text>
-        {error ? <Text style={styles.error}>{error}</Text> : null}
+        {/* {error ? <Text style={styles.error}>{error}</Text> : null} */}
+        {error !== '' ? <Text style={styles.error}>{error}</Text> : null}
       </View>
       <TextInput placeholder={placeholder} style={styles.input} {...rest} />
     </>

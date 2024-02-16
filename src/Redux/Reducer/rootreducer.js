@@ -1,8 +1,10 @@
-import { combineReducers } from "redux";
-import reducer from "../Reducer/Reducer";
+// rootreducer.js
 
+// import { combineReducers } from "redux";
+// import { reducer } from "./cartReducer"; // Assuming your reducer is imported correctly
 
+// const rootReducer = combineReducers({
+//   reducer: reducer
+// });
 
-export default combineReducers({
-    reducer 
-})
+// export default rootReducer;
